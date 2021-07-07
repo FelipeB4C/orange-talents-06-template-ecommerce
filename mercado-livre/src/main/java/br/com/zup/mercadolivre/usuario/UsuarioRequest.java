@@ -4,8 +4,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import br.com.zup.mercadolivre.compartilhado.UniqueValue;
+
 public class UsuarioRequest {
 
+	@UniqueValue(domainClass = Usuario.class, fieldName = "login")
 	@Email
 	@NotBlank
 	private String login;
