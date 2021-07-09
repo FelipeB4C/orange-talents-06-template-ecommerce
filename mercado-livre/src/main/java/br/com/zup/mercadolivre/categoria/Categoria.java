@@ -19,7 +19,8 @@ public class Categoria {
 
 	@ManyToOne
 	private Categoria categoriaMae;
-
+ 
+	@Deprecated
 	public Categoria() {
 
 	}
@@ -28,8 +29,8 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	public void setCategoriaMae(Categoria categoria) {
-		this.categoriaMae = categoria;
+	public void setCategoriaMae(Categoria categoriaMae) {
+		this.categoriaMae = categoriaMae;
 	}
 
 }

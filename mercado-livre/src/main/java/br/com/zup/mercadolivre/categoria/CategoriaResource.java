@@ -1,7 +1,5 @@
 package br.com.zup.mercadolivre.categoria;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -17,19 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoriaResource {
 
 	
-//	@PersistenceContext
-//	private EntityManager manager;
-	
 	@Autowired
 	private CategoriaRepository repo;
-	
-//	@PostMapping
-//	@Transactional
-//	public ResponseEntity<Void> insert(@RequestBody @Valid CategoriaRequest obj){
-//		Categoria categoria = obj.toModel(manager);
-//		repo.save(categoria);
-//		return ResponseEntity.created(null).build();
-//	}
+
 	
 	@PostMapping
 	@Transactional
