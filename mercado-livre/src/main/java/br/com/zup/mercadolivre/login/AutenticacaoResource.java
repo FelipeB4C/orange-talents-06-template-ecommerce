@@ -30,7 +30,6 @@ public class AutenticacaoResource {
 
 			return ResponseEntity.ok(new TokenResponse(token, "Bearer"));
 		} catch (Exception e) {
-			System.out.println("Eu tô aqui???");
 			return ResponseEntity.badRequest().build();
 
 		}
