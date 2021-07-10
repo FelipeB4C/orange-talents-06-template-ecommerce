@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -40,7 +41,7 @@ public class Produto {
 	@NotNull
 	@PositiveOrZero
 	private Integer qtdDisponivel;
-	
+
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
 	private Set<CaracteristicaProduto> caracteristicas = new HashSet<>();
 
@@ -56,20 +57,38 @@ public class Produto {
 	@ManyToOne
 	private Usuario dono;
 
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+	private Set<ImagemProduto> imagens = new HashSet<>();
+
 	private LocalDateTime instante = LocalDateTime.now();
+
+	@Deprecated
+	public Produto() {
+
+	}
 
 	public Produto(@NotBlank String nome, @Positive @NotNull BigDecimal valor,
 			@NotNull @PositiveOrZero Integer qtdDisponivel, @NotBlank @Size(max = 1000) String descricao,
-			Collection<NovaCaracteristicaRequest> caracteristicas, @NotNull Categoria categoria, @NotNull Usuario dono) {
+			Collection<NovaCaracteristicaRequest> caracteristicas, @NotNull Categoria categoria,
+			@NotNull Usuario dono) {
 		this.nome = nome;
 		this.valor = valor;
 		this.qtdDisponivel = qtdDisponivel;
 		this.descricao = descricao;
 		this.categoria = categoria;
 		this.dono = dono;
-		this.caracteristicas.addAll(caracteristicas
-				.stream().map(caracteristica -> caracteristica.toModel(this))
+		this.caracteristicas.addAll(caracteristicas.stream().map(caracteristica -> caracteristica.toModel(this))
 				.collect(Collectors.toSet()));
+	}
+
+	public void associaImagens(Set<String> links) {
+		Set<ImagemProduto> imagens = links.stream().map(link -> new ImagemProduto(this, link))
+				.collect(Collectors.toSet());
+		this.imagens.addAll(imagens);
+	}
+
+	public boolean pertenceAoUsuario(Usuario possivelDono) {
+		return this.dono.equals(possivelDono);
 	}
 
 }

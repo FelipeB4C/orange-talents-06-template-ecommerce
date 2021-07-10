@@ -7,39 +7,40 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.URL;
+
 @Entity
-public class CaracteristicaProduto {
+public class ImagemProduto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotBlank
-	private String nome;
-	@NotBlank
-	private String descricao;
-	
+
 	@NotNull
 	@ManyToOne
+	@Valid
 	private Produto produto;
-	
+
+	@NotNull
+	@URL
+	private String link;
+
 	@Deprecated
-	public CaracteristicaProduto() {
-		
+	public ImagemProduto() {
+
 	}
 
-	public CaracteristicaProduto(@NotBlank String nome, @NotBlank String descricao, @NotBlank Produto produto) {
-		this.nome = nome;
-		this.descricao = descricao;
+	public ImagemProduto(Produto produto, String link) {
 		this.produto = produto;
+		this.link = link;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(nome);
+		return Objects.hash(link, produto);
 	}
 
 	@Override
@@ -50,8 +51,8 @@ public class CaracteristicaProduto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CaracteristicaProduto other = (CaracteristicaProduto) obj;
-		return Objects.equals(nome, other.nome);
+		ImagemProduto other = (ImagemProduto) obj;
+		return Objects.equals(link, other.link) && Objects.equals(produto, other.produto);
 	}
 
 }
