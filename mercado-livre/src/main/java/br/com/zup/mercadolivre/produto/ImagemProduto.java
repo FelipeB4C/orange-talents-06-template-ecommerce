@@ -55,4 +55,8 @@ public class ImagemProduto {
 		return Objects.equals(link, other.link) && Objects.equals(produto, other.produto);
 	}
 
+	public String getLink() {
+		return link;
+	}
+
 }

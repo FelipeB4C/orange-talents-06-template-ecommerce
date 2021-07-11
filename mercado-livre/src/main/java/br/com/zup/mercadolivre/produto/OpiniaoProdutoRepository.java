@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OpiniaoProdutoRepository extends JpaRepository<OpiniaoProduto, Long>{
-
+	
 }
