@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
@@ -21,7 +20,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name = "Usuario")
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -80,6 +78,11 @@ public class Usuario implements UserDetails {
 
 	public Long getId() {
 		return id;
+	}
+
+	
+	public String getLogin() {
+		return login;
 	}
 
 	@Override
