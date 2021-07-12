@@ -150,4 +150,12 @@ public class Produto {
 		return this.perguntas.stream().map(funcaoMapeadora).collect(Collectors.toCollection(TreeSet::new));
 	}
 
+	public boolean abataEstoque(int quantidade) {
+		if(quantidade <= this.qtdDisponivel) {
+			this.qtdDisponivel-= quantidade;
+			return true;
+		}
+		return false;
+	}
+
 }
